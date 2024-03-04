@@ -1,0 +1,340 @@
+Program.Sub.ScreenSU.Start
+gui.Form1..create
+gui.Form1..caption("PCK Upload")
+gui.Form1..size(6060,1995)
+gui.Form1..minx(0)
+gui.Form1..miny(0)
+gui.Form1..position(0,0)
+gui.Form1..event(unload,form1_unload)
+gui.Form1..alwaysontop(False)
+gui.Form1..fontname("Arial")
+gui.Form1..fontsize(8)
+gui.Form1..forecolor(0)
+gui.Form1..fontstyle(,,,,)
+gui.Form1..BackColor(-2147483633)
+gui.Form1..controlbox(True)
+gui.Form1..maxbutton(True)
+gui.Form1..minbutton(True)
+gui.Form1..mousepointer(0)
+gui.Form1..moveable(True)
+gui.Form1..sizeable(True)
+gui.Form1..ShowInTaskBar(True)
+gui.Form1..titlebar(True)
+gui.Form1.lblPCKFilePath.create(label,"PCK File Path",True,1935,255,1,185,160,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblPCKFilePath.defaultvalue("")
+gui.Form1.lblPCKFilePath.controlgroup(0)
+gui.Form1.txtFilepath.create(textbox,"",True,4965,300,0,170,430,True,0,Arial,8,-2147483643,1)
+gui.Form1.txtFilepath.defaultvalue("")
+gui.Form1.txtFilepath.controlgroup(0)
+gui.Form1.cmdbrowse.create(button)
+gui.Form1.cmdbrowse.caption("^")
+gui.Form1.cmdbrowse.visible(True)
+gui.Form1.cmdbrowse.size(400,300)
+gui.Form1.cmdbrowse.zorder(0)
+gui.Form1.cmdbrowse.position(5240,425)
+gui.Form1.cmdbrowse.enabled(True)
+gui.Form1.cmdbrowse.fontname("Arial")
+gui.Form1.cmdbrowse.fontsize(8)
+gui.Form1.cmdbrowse.event(click,cmdbrowse_click)
+gui.Form1.cmdbrowse.defaultvalue("")
+gui.Form1.cmdbrowse.controlgroup(0)
+gui.Form1.cmdUpload.create(button)
+gui.Form1.cmdUpload.caption("Upload")
+gui.Form1.cmdUpload.visible(True)
+gui.Form1.cmdUpload.size(855,375)
+gui.Form1.cmdUpload.zorder(0)
+gui.Form1.cmdUpload.position(200,910)
+gui.Form1.cmdUpload.enabled(True)
+gui.Form1.cmdUpload.fontname("Arial")
+gui.Form1.cmdUpload.fontsize(8)
+gui.Form1.cmdUpload.event(click,cmdupload_click)
+gui.Form1.cmdUpload.defaultvalue("")
+gui.Form1.cmdUpload.controlgroup(0)
+gui.Form1.cmdClear.create(button)
+gui.Form1.cmdClear.caption("Clear")
+gui.Form1.cmdClear.visible(True)
+gui.Form1.cmdClear.size(855,375)
+gui.Form1.cmdClear.zorder(0)
+gui.Form1.cmdClear.position(1400,910)
+gui.Form1.cmdClear.enabled(True)
+gui.Form1.cmdClear.fontname("Arial")
+gui.Form1.cmdClear.fontsize(8)
+gui.Form1.cmdClear.event(click,cmdclear_click)
+gui.Form1.cmdClear.defaultvalue("")
+gui.Form1.cmdClear.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'This is a custom GAB script for Vonberg that will allow the user to select a pck file and will be used to issue material based on information within the file
+'coded by: WAW
+'date: 11/2/15
+
+'connect to the database
+Function.ODBC.Connection!Con.OpenConnection(Variable.ambient.PDSN,Variable.Ambient.PUSER,Variable.Ambient.PPass)
+
+'make the form visible
+Gui.Form1..Visible(true)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Upload_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.cmdbrowse_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdbrowse_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRet.Declare(Long)
+
+'get file path for document and then attach automatically without going through doc control screen
+'invoke open file dialogue
+V.Local.sFile.Declare(String)
+
+'Browse for file to upload from
+'F.Intrinsic.UI.ShowOpenFileDialog("","xls|*.xls",,V.Local.sFile)
+F.Intrinsic.UI.ShowOpenFileDialog("","",,V.Local.sFile)
+F.Intrinsic.Control.If(V.Local.sFile,<>,"***CANCEL***")
+'set textbox to sFile
+Gui.Form1.txtFilepath.Text(V.Local.sfile.Trim)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdbrowse_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Upload_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdbrowse_click.end
+
+program.sub.cmdclear_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdclear_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'clear the file path selected
+Gui.Form1.txtFilepath.Text("")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdclear_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Upload_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdclear_click.end
+
+program.sub.cmdupload_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdupload_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.bret.Declare(Boolean)
+V.Local.bexists.Declare(Boolean)
+V.Local.sfile.Declare(String)
+V.Local.sfile2.Declare(String)
+V.Local.iret2.Declare(Long)
+V.Local.i.Declare(Long)
+V.Local.sjob.Declare(String)
+V.Local.ssuffix.Declare(String)
+V.Local.sseq.Declare(String)
+V.Local.spart.Declare(String)
+V.Local.posarray.Declare(Long)
+V.Local.lenarray.Declare(Long)
+V.Local.retarray.Declare(String)
+V.Local.stext.Declare(String)
+V.Local.ssql.Declare(String)
+V.Local.sqty.Declare(String)
+V.Local.stempline.Declare(String)
+V.Local.stempfilepath.Declare(String)
+V.Local.stempfinal.Declare(String)
+
+V.Local.srev.Declare(String)
+F.Intrinsic.String.RPad(V.Local.srev," ",3,V.Local.srev)
+V.Local.sloc.Declare(String)
+F.Intrinsic.String.RPad(V.Local.sloc," ",2,V.Local.sloc)
+V.Local.slot.Declare(String)
+F.Intrinsic.String.RPad(V.Local.slot," ",15,V.Local.slot)
+V.Local.sbin.Declare(String)
+F.Intrinsic.String.RPad(V.Local.sbin," ",6,V.Local.sbin)
+V.Local.sheat.Declare(String)
+F.Intrinsic.String.RPad(V.Local.sheat," ",15,V.Local.sheat)
+V.Local.sseriallength.Declare(String)
+F.Intrinsic.String.RPad(V.Local.sseriallength," ",30,V.Local.sseriallength)
+
+'make the form invisible
+Gui.Form1..Visible(false)
+
+'give the user a message to wait
+F.Intrinsic.UI.InvokeWaitDialog("Loading, please wait...")
+
+V.Local.iret2.Set(0)
+
+'f.Intrinsic.Control.If(v.Screen.Form1!txtFilepath
+F.Intrinsic.String.IsInString(V.Screen.Form1!txtFilepath.Text,".pck",True,V.Local.bret)
+
+'check to make sure it is a pck file
+F.Intrinsic.Control.If(V.Local.bret,=,False)
+	F.Intrinsic.UI.Msgbox("Please select a .pck file")
+	Gui.Form1.txtFilepath.Text("")
+	F.Intrinsic.Control.ExitSub
+F.intrinsic.Control.EndIf
+
+V.Local.sfile.set(V.Screen.Form1!txtFilepath.Text)
+
+'check to see if the file exists
+F.Intrinsic.File.Exists(V.Local.sfile,V.Local.bexists)
+
+F.Intrinsic.Control.If(V.Local.bexists,=,True)
+	'turn the file data into a string
+	F.Intrinsic.File.File2String(V.Local.sfile,V.Local.sfile2)
+
+	'split the return based on ambient lines
+	F.Intrinsic.String.Split(V.Local.sfile2,V.Ambient.NewLine,V.Local.sfile2)
+
+	'loop through the return and get the information needed to build the upload
+	F.Intrinsic.control.For(V.Local.i,V.Local.iret2,V.Local.sfile2.UBound,1)
+		'get the job
+'		V.Local.posarray.Set(5,12,21,27)
+		V.Local.posarray.Set(5)
+'		V.Local.lenarray.Set(6,3,6,20)
+
+		V.Local.lenarray.Set(6)
+		F.Intrinsic.String.PositionalSplit(V.Local.sfile2(v.Local.i),V.Local.posarray,V.Local.lenarray,V.Local.stext)
+		V.Local.sjob.Set(V.Local.stext)
+		'pad  job 6 characters characters
+		F.Intrinsic.String.RPad(V.Local.sjob," ",6,V.Local.sjob)
+		'clear the text
+		V.Local.stext.Set("")
+		'get the sufix
+		V.Local.lenarray.Set(3)
+		V.Local.posarray.Set(12)
+		F.Intrinsic.String.PositionalSplit(V.Local.sfile2(v.Local.i),V.Local.posarray,V.Local.lenarray,V.Local.stext)
+		V.Local.ssuffix.Set(V.Local.stext)
+		'pad the suffix 3 characters
+		F.Intrinsic.String.RPad(V.Local.ssuffix," ",3,V.local.ssuffix)
+		'clear the text
+		V.Local.stext.Set("")
+
+		'get the sequence
+		V.Local.posarray.Set(21)
+		V.Local.lenarray.Set(6)
+		F.Intrinsic.String.PositionalSplit(V.Local.sfile2(v.Local.i),V.Local.posarray,V.Local.lenarray,V.Local.stext)
+		V.Local.sseq.Set(V.Local.stext)
+		'pad the sequence 6 characters
+		F.Intrinsic.String.RPad(V.Local.sseq," ",6,V.Local.sseq)
+
+		'clear the text
+		V.Local.stext.Set("")
+
+		'get the part
+		V.Local.posarray.Set(27)
+		V.Local.lenarray.Set(20)
+		F.Intrinsic.String.PositionalSplit(V.Local.sfile2(v.Local.i),V.Local.posarray,V.Local.lenarray,V.Local.stext)
+		V.Local.spart.Set(V.local.stext)
+		'pad the part 20 characters
+		F.Intrinsic.String.RPad(V.Local.spart," ",20,V.Local.spart)
+
+		'clear the text
+		V.Local.stext.Set("")
+
+		F.Intrinsic.String.build("select UNITS_OPEN from V_JOB_OPERATIONS where JOB = '{0}' and SUFFIX = '{1}' and SEQ = '{2}'",V.local.sjob,V.Local.ssuffix,V.Local.sseq,V.Local.ssql)
+		F.ODBC.Connection!Con.OpenLocalRecordsetRO("rst",V.Local.ssql)
+		F.Intrinsic.Control.If(V.odbc.Con!rst.EOF,=,False)
+			'set the qty value
+			V.Local.sqty.Set(V.ODBC.Con!rst.FieldValTrim!UNITS_OPEN)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Con!rst.Close
+		F.Intrinsic.String.RPad(V.Local.sqty," ",16,V.Local.sqty)
+
+		F.Intrinsic.String.Build("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}",V.Local.spart,V.Local.srev,V.Local.sloc,V.Local.sqty,V.Local.slot,V.Local.sbin,V.Local.sheat,V.Local.sseriallength,V.Local.sjob,V.Local.ssuffix,V.Local.sseq,V.Local.stempline)
+	
+		'check to see if the temp is blank
+		F.Intrinsic.Control.If(V.Local.stempfinal,<>,"")
+			F.Intrinsic.String.Build("{0}{1}{2}",V.Local.stempfinal,V.Ambient.NewLine,V.Local.stempline,V.Local.stempfinal)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Build("{0}{1}",V.Local.stempfinal,V.Ambient.NewLine,V.Local.stempfinal)
+		F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Control.Next(V.Local.i)
+
+	F.Intrinsic.String.Build("{0}{1}",V.Local.stempfinal,V.Ambient.NewLine,V.Local.stempfinal)
+
+	F.Global.General.CallWrapperAsync(450100,V.Local.stempfinal)
+
+F.Intrinsic.Control.Else
+	'inform the user that file doesn't exist, exit the sub
+	F.Intrinsic.UI.Msgbox("That file does not exists")
+	Gui.Form1.txtFilepath.Text("")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.UI.CloseWaitDialog
+
+	F.Intrinsic.Control.CallSub(Form1_unload)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdupload_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Upload_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdupload_click.end
+
+program.sub.form1_unload.start
+F.Intrinsic.Control.SetErrorHandler("form1_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'close connection to the database
+Function.ODBC.Connection!con.Close
+
+'End the program
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("form1_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Upload_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.form1_unload.end
+
+Program.Sub.Comments.Start
+${$0$}$GCG_Upload_PCK_7227$}$WAW$}$11/2/2015
+Program.Sub.Comments.End
+
