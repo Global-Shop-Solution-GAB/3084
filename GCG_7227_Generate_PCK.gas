@@ -1,0 +1,433 @@
+Program.Sub.ScreenSU.Start
+gui.Form1..create
+gui.Form1..caption("Generate PCK File")
+gui.Form1..size(5460,3870)
+gui.Form1..minx(0)
+gui.Form1..miny(0)
+gui.Form1..position(0,0)
+gui.Form1..event(unload,form1_unload)
+gui.Form1..alwaysontop(False)
+gui.Form1..fontname("Arial")
+gui.Form1..fontsize(8)
+gui.Form1..forecolor(0)
+gui.Form1..fontstyle(,,,,)
+gui.Form1..BackColor(-2147483633)
+gui.Form1..controlbox(True)
+gui.Form1..maxbutton(False)
+gui.Form1..minbutton(False)
+gui.Form1..mousepointer(0)
+gui.Form1..moveable(True)
+gui.Form1..sizeable(False)
+gui.Form1..ShowInTaskBar(True)
+gui.Form1..titlebar(True)
+gui.Form1.lblSort.create(label,"Sort Codes",True,1935,255,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblSort.defaultvalue("")
+gui.Form1.lblSort.controlgroup(0)
+gui.Form1.dropdownlist1.create(dropdownlist)
+gui.Form1.dropdownlist1.visible(True)
+gui.Form1.dropdownlist1.size(1455,330)
+gui.Form1.dropdownlist1.zorder(0)
+gui.Form1.dropdownlist1.position(200,490)
+gui.Form1.dropdownlist1.enabled(True)
+gui.Form1.dropdownlist1.fontname("Arial")
+gui.Form1.dropdownlist1.fontsize(8)
+gui.Form1.dropdownlist1.defaultvalue("")
+gui.Form1.dropdownlist1.controlgroup(0)
+gui.Form1.datepicker1.create(datepicker)
+gui.Form1.datepicker1.visible(True)
+gui.Form1.datepicker1.size(1350,285)
+gui.Form1.datepicker1.zorder(0)
+gui.Form1.datepicker1.position(200,1400)
+gui.Form1.datepicker1.enabled(True)
+gui.Form1.datepicker1.checkbox(False)
+gui.Form1.datepicker1.defaultvalue("")
+gui.Form1.datepicker1.controlgroup(0)
+gui.Form1.lblBegDate.create(label,"Beginning Date",True,1935,255,1,200,1000,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblBegDate.defaultvalue("")
+gui.Form1.lblBegDate.controlgroup(0)
+gui.Form1.datepicker2.create(datepicker)
+gui.Form1.datepicker2.visible(True)
+gui.Form1.datepicker2.size(1350,285)
+gui.Form1.datepicker2.zorder(0)
+gui.Form1.datepicker2.position(1800,1400)
+gui.Form1.datepicker2.enabled(True)
+gui.Form1.datepicker2.checkbox(False)
+gui.Form1.datepicker2.defaultvalue("")
+gui.Form1.datepicker2.controlgroup(0)
+gui.Form1.lblEndDate.create(label,"Ending Date",True,1935,255,1,1800,1000,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblEndDate.defaultvalue("")
+gui.Form1.lblEndDate.controlgroup(0)
+gui.Form1.cmdGenerate.create(button)
+gui.Form1.cmdGenerate.caption("Generate")
+gui.Form1.cmdGenerate.visible(True)
+gui.Form1.cmdGenerate.size(855,375)
+gui.Form1.cmdGenerate.zorder(0)
+gui.Form1.cmdGenerate.position(200,2770)
+gui.Form1.cmdGenerate.enabled(True)
+gui.Form1.cmdGenerate.fontname("Arial")
+gui.Form1.cmdGenerate.fontsize(8)
+gui.Form1.cmdGenerate.event(click,cmdgenerate_click)
+gui.Form1.cmdGenerate.defaultvalue("")
+gui.Form1.cmdGenerate.controlgroup(0)
+gui.Form1.lblbegWO.create(label,"Starting Work Order",True,1950,315,1,200,1900,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblbegWO.defaultvalue("")
+gui.Form1.lblbegWO.controlgroup(0)
+gui.Form1.lblEndingWO.create(label,"Ending Work Order",True,1935,255,1,2790,1900,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblEndingWO.defaultvalue("")
+gui.Form1.lblEndingWO.controlgroup(0)
+gui.Form1.txt1.create(textbox,"",True,1755,300,0,200,2200,True,0,Arial,8,-2147483643,1)
+gui.Form1.txt1.defaultvalue("")
+gui.Form1.txt1.controlgroup(0)
+gui.Form1.txt2.create(textbox,"",True,1755,300,0,2775,2190,True,0,Arial,8,-2147483643,1)
+gui.Form1.txt2.defaultvalue("")
+gui.Form1.txt2.controlgroup(0)
+gui.Form1.cmdBegWOBrowse.create(button)
+gui.Form1.cmdBegWOBrowse.caption("^")
+gui.Form1.cmdBegWOBrowse.visible(True)
+gui.Form1.cmdBegWOBrowse.size(465,345)
+gui.Form1.cmdBegWOBrowse.zorder(0)
+gui.Form1.cmdBegWOBrowse.position(2015,2180)
+gui.Form1.cmdBegWOBrowse.enabled(True)
+gui.Form1.cmdBegWOBrowse.fontname("Arial")
+gui.Form1.cmdBegWOBrowse.fontsize(8)
+gui.Form1.cmdBegWOBrowse.event(click,cmdbegwobrowse_click)
+gui.Form1.cmdBegWOBrowse.defaultvalue("")
+gui.Form1.cmdBegWOBrowse.controlgroup(0)
+gui.Form1.cmdEndingWOBrowse.create(button)
+gui.Form1.cmdEndingWOBrowse.caption("^")
+gui.Form1.cmdEndingWOBrowse.visible(True)
+gui.Form1.cmdEndingWOBrowse.size(465,375)
+gui.Form1.cmdEndingWOBrowse.zorder(0)
+gui.Form1.cmdEndingWOBrowse.position(4585,2145)
+gui.Form1.cmdEndingWOBrowse.enabled(True)
+gui.Form1.cmdEndingWOBrowse.fontname("Arial")
+gui.Form1.cmdEndingWOBrowse.fontsize(8)
+gui.Form1.cmdEndingWOBrowse.event(click,cmdendingwobrowse_click)
+gui.Form1.cmdEndingWOBrowse.defaultvalue("")
+gui.Form1.cmdEndingWOBrowse.controlgroup(0)
+gui.Form1.dropdownlist1.tabstop(True)
+gui.Form1.dropdownlist1.tabindex(1)
+gui.Form1.datepicker1.tabstop(True)
+gui.Form1.datepicker1.tabindex(2)
+gui.Form1.datepicker2.tabstop(True)
+gui.Form1.datepicker2.tabindex(3)
+gui.Form1.txt1.tabstop(True)
+gui.Form1.txt1.tabindex(4)
+gui.Form1.cmdBegWOBrowse.tabstop(True)
+gui.Form1.cmdBegWOBrowse.tabindex(5)
+gui.Form1.txt2.tabstop(True)
+gui.Form1.txt2.tabindex(6)
+gui.Form1.cmdEndingWOBrowse.tabstop(True)
+gui.Form1.cmdEndingWOBrowse.tabindex(7)
+gui.Form1.cmdGenerate.tabstop(True)
+gui.Form1.cmdGenerate.tabindex(8)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uPart.Define("PART",String,PART)
+Variable.uGlobal.uPart.Declare("uPart")
+Variable.UDT.uPCK.Define("JOB",String,JOB)
+Variable.UDT.uPCK.Define("SUFFIX",String,SUFFIX)
+Variable.UDT.uPCK.Define("SEQ",String,SEQ)
+Variable.UDT.uPCK.Define("PART",String,PART)
+Variable.UDT.uPCK.Define("HOURS_ESTIMATED",String,HOURS_ESTIMATED)
+Variable.uGlobal.uPCK.Declare("uPCK")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.ssql.Declare(String)
+V.Local.sddlvalue.Declare(String)
+V.Local.bprod.Declare(Boolean)
+
+'This is a custom GAB script for Vonberg that generates a PCK file and saves it in a specified directory for a carousel machine to read
+'Coded by: WAW
+'Date: 10/27/15
+
+'open connection to the database
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Intrinsic.String.Build("Select distinct CODE_SORT from INVENTORY_MSTR where CODE_SORT <> '{0}'","",V.Local.ssql)
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.ssql)
+F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+	'set the local variable as the code sort and load it to the drop down list
+	V.local.sddlvalue.Set(V.ODBC.con!rst.fieldvaltrim!CODE_SORT)
+	Gui.Form1.dropdownlist1.AddItem(V.Local.sddlvalue)
+	F.ODBC.con!rst.MoveNext
+F.Intrinsic.Control.Loop
+
+Gui.Form1.dropdownlist1.FindItem("PROD",V.Local.bprod)
+
+		'make the form visible
+Gui.Form1..Visible(true)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Generate_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.form1_unload.start
+F.Intrinsic.Control.SetErrorHandler("form1_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'close connection to the database	
+F.ODBC.Connection!con.Close
+
+'make the form invisible
+Gui.Form1..Visible(false)
+
+'end the program
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("form1_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Generate_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.form1_unload.end
+
+program.sub.cmdgenerate_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdgenerate_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.scodesort.Declare(String)
+V.Local.ssql.Declare(String)
+V.Local.ssql2.Declare(String)
+V.Local.sstartdate.Declare(String)
+V.Local.senddate.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.i2.Declare(Long)
+V.Local.sjob.Declare(String)
+V.Local.ssuffix.Declare(String)
+V.Local.sjobsuffix.Declare(String)
+V.Local.sseq.Declare(String)
+V.Local.shoursest.Declare(String)
+V.Local.spart.Declare(String)
+V.Local.stempline.Declare(String)
+V.Local.stempfinal.Declare(String)
+V.Local.sdate.Declare(String)
+V.Local.stime.Declare(String)
+V.Local.sfile.Declare(String)
+V.Local.sstartwo.Declare(String)
+V.Local.sendwo.Declare(String)
+V.Local.sstartjob.Declare(String)
+V.Local.sstartsuffix.Declare(String)
+V.Local.sendjob.Declare(String)
+V.local.sendsuffix.Declare(String)
+V.Local.sbegfinalwo.Declare(String)
+V.Local.sendfinalwo.Declare(String)
+
+'format the time and date
+F.Intrinsic.String.Format(V.Ambient.Date,"MMDDYYY",V.Local.sdate)
+F.Intrinsic.String.Format(V.Ambient.Time,"HHMM",V.Local.stime)
+
+'build how the file will be saved
+F.Intrinsic.String.Build("{0}\PCK\{3}{1}{2}.pck",V.Caller.FilesDir,V.Local.sdate,V.Local.stime,"PCK",V.Local.sfile)
+
+'check to make sure a beginning workorder was selected
+F.Intrinsic.Control.If(V.Screen.Form1!txt1.Text,=,"")
+	F.Intrinsic.UI.Msgbox("Please select a Workorder")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'check to make sure a code sort has been selected
+F.Intrinsic.Control.If(V.Screen.Form1!dropdownlist1.Text,=,"")
+	F.Intrinsic.UI.Msgbox("Please select a Sort Code")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'set a local variable as the code sort
+V.Local.scodesort.Set(V.Screen.Form1!dropdownlist1.Text)
+
+'go through inventory mstr and get all parts that have the selected code_sort
+F.Intrinsic.String.Build("select PART from INVENTORY_MSTR where CODE_SORT = '{0}'",V.Local.scodesort,V.Local.ssql)
+F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.ssql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	'load the parts to a udt
+	F.Intrinsic.Variable.LoadUDTFromRecordset("con","rst","uglobal.uPart","false",10000)
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+
+V.Local.sstartdate.Set(V.Screen.Form1!datepicker1.Value)
+V.Local.senddate.Set(V.Screen.Form1!datepicker2.Value)
+
+V.Local.sstartwo.set(V.Screen.Form1!txt1.Text)
+V.Local.sendwo.set(V.Screen.Form1!txt2.Text)
+
+F.Intrinsic.String.Split(V.Local.sstartwo,"-",V.Local.sstartwo)
+V.Local.sstartjob.set(V.Local.sstartwo(0))
+V.Local.sstartsuffix.set(V.local.sstartwo(1))
+
+F.Intrinsic.String.Build("{0}{1}",V.Local.sstartwo(0),V.Local.sstartwo(1),V.Local.sbegfinalwo)
+
+F.Intrinsic.String.Split(V.Local.sendwo,"-",V.Local.sendwo)
+V.Local.sendjob.Set(V.Local.sendwo(0))
+V.Local.sendsuffix.Set(V.Local.sendwo(1))
+
+F.Intrinsic.String.Build("{0}{1}",V.Local.sendwo(0),V.Local.sendwo(1),V.Local.sendfinalwo)
+
+'select JOB,SUFFIX, SEQ, PART, HOURS_ESTIMATED from V_JOB_OPERATIONS where DATE_START between '2015-01-01' and '2015-11-11' and JOB+suffix between '000155001' and '500008000' and  LMO = 'M' and SEQ < '995000' order by JOB,SUFFIX
+F.Intrinsic.String.Build("select JOB,SUFFIX, SEQ, PART, HOURS_ESTIMATED from V_JOB_OPERATIONS where DATE_DUE between '{0}' and '{1}' and JOB+SUFFIX between '{2}' and '{3}' and LMO = '{4}' and SEQ < '{5}' order by JOB+SUFFIX",V.local.sstartdate.pervasivedate,V.local.senddate.pervasiveDate,V.local.sbegfinalwo,V.local.sendfinalwo,"M","99000",V.local.ssql)
+'F.Intrinsic.String.Build("select JOB,SUFFIX, SEQ, PART, HOURS_ESTIMATED from V_JOB_OPERATIONS where DATE_START between '{0}' and '{1}' and  LMO = '{2}' and SEQ < '{3}' order by JOB,SUFFIX",V.Local.sstartdate.PervasiveDate,V.local.senddate.PervasiveDate,"M","99000",V.Local.ssql)
+'F.Intrinsic.String.Build("select JOB,SUFFIX, SEQ, PART, HOURS_ESTIMATED from V_JOB_OPERATIONS where DATE_START between '{0}' and '{1}' and JOB between '{4}' and '{5}' and SUFFIX between '{6}' and '{7}' and  LMO = '{2}' and SEQ > '{3}' order by JOB,SUFFIX",V.Local.sstartdate.PervasiveDate,V.local.senddate.PervasiveDate,"M","99000",V.local.sstartjob,V.local.sendjob,V.local.sstartsuffix,V.local.sendsuffix,V.Local.ssql)
+
+F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.ssql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.Intrinsic.variabLE.LoadUDTFromRecordset("con","rst","uglobal.uPCK","false",10000)
+'	F.Intrinsic.Control.EndIf
+''F.Intrinsic.Control.Next(V.Local.i)
+'F.ODBC.con!rst.Close
+
+'loop through the PCK udt and build the PCK file
+F.Intrinsic.Control.For(V.Local.i2,V.uglobal.uPCK.LBound,V.uGlobal.uPCK.UBound,1)
+	'set local variables for the job/suffix
+	V.Local.sjob.set(V.uGlobal.uPCK(v.Local.i2)!JOB)
+	V.Local.ssuffix.Set(V.uGlobal.uPCK(v.Local.i2)!SUFFIX)
+	F.Intrinsic.String.Concat(V.Local.sjob,"-",V.Local.ssuffix,V.Local.stempline)
+	F.Intrinsic.String.Build("{0}{1}","Pck ",V.local.stempline,V.local.stempline)
+	'right pad the job-suffix 16 characters
+	F.Intrinsic.String.RPad(V.Local.stempline," ",20,V.Local.stempline)
+	'set a local variable as the sequence, then pad it 5 characters
+	V.Local.sseq.Set(V.uGlobal.uPCK(v.Local.i2)!SEQ)
+	F.Intrinsic.String.RPad(V.Local.sseq," ",6,V.local.sseq)
+	F.Intrinsic.String.Build("{0}{1}",V.Local.stempline,V.local.sseq,V.local.stempline)
+	'set a local variable for part and pad it 20 characters
+	V.Local.spart.Set(V.uGlobal.uPCK(v.Local.i2)!PART)
+	F.Intrinsic.String.RPad(V.Local.spart," ",20,V.Local.spart)
+	F.Intrinsic.String.Build("{0}{1}",V.Local.stempline,V.Local.spart,V.Local.stempline)
+	'set a local variable for estimated hours and pad it 12 characters
+	V.Local.shoursest.Set(V.uGlobal.uPCK(v.Local.i2)!HOURS_ESTIMATED)
+	F.Intrinsic.String.RPad(V.Local.shoursest," ",12,V.Local.shoursest)
+	'add the hourse to tempine
+	F.Intrinsic.String.Build("{0}{1}",V.local.stempline,V.Local.shoursest,V.Local.stempline)
+
+	'check to see if temp final is blank
+	F.Intrinsic.control.if(V.local.stempfinal,<>,"")
+		F.Intrinsic.String.Build("{0}{1}{2}",V.Local.stempfinal,V.Ambient.NewLine,V.Local.stempline,V.Local.stempfinal)
+	F.Intrinsic.Control.else
+		F.intrinsic.String.Build("{0}{1}",V.Local.stempfinal,V.Local.stempline,V.Local.stempfinal)
+	F.Intrinsic.Control.EndIf
+F.intrinsic.control.next(V.Local.i2)
+
+F.Intrinsic.String.Build("{0}{1}",V.Local.stempfinal,V.Ambient.NewLine,V.Local.stempfinal)
+
+'build the file
+F.Intrinsic.File.String2File(V.Local.sfile,V.Local.stempfinal)
+
+	F.Intrinsic.Control.EndIf
+'F.Intrinsic.Control.Next(V.Local.i)
+F.ODBC.con!rst.Close
+
+'call the unload subroutine
+F.Intrinsic.Control.CallSub(Form1_unload)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdgenerate_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Generate_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdgenerate_click.end
+
+program.sub.cmdbegwobrowse_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdbegwobrowse_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sret.Declare(String)
+V.Local.sjob.Declare(String)
+V.Local.ssuffix.Declare(String)
+V.Local.swo.Declare(String)
+
+F.Intrinsic.UI.Browser(1000,"Select a Workorder",V.Local.sret)
+
+'allow the user to select a wo and populate the textboxes accordingly
+F.Intrinsic.Control.If(V.Local.sret,=,"***CANCEL***")
+	F.Intrinsic.UI.Msgbox("No Workorder was selected.")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sret,"*!*",V.Local.sret)
+	V.local.sjob.set(V.local.sret(0))
+	V.local.ssuffix.set(V.local.sret(1))
+	F.Intrinsic.String.Build("{0}-{1}",V.Local.sjob,V.Local.ssuffix,V.Local.swo)
+	Gui.Form1.txt1.Text(V.Local.swo)
+	Gui.Form1.txt2.Text(V.Local.swo)
+
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdbegwobrowse_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Generate_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdbegwobrowse_click.end
+
+program.sub.cmdendingwobrowse_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdendingwobrowse_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.sret.Declare(String)
+V.Local.sjob.Declare(String)
+V.Local.ssuffix.Declare(String)
+V.Local.swo.Declare(String)
+
+F.Intrinsic.UI.Browser(1000,"Select a Workorder",V.Local.sret)
+
+'allow the user to select a wo and populate the textboxes accordingly
+F.Intrinsic.Control.If(V.Local.sret,=,"***CANCEL***")
+	F.Intrinsic.UI.Msgbox("No Workorder was selected.")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sret,"*!*",V.Local.sret)
+	V.local.sjob.set(V.local.sret(0))
+	V.local.ssuffix.set(V.local.sret(1))
+	F.Intrinsic.String.Build("{0}-{1}",V.Local.sjob,V.Local.ssuffix,V.Local.swo)
+	Gui.Form1.txt2.Text(V.Local.swo)
+
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdendingwobrowse_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_7227_Generate_PCK.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdendingwobrowse_click.end
+
+Program.Sub.Comments.Start
+${$0$}$GCG_Generate_PCK_7227$}$WAW$}$10/27/2015
+Program.Sub.Comments.End
+
